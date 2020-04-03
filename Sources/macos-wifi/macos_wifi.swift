@@ -9,13 +9,13 @@ import Foundation
 /** Most Core WLAN members are prefixed with "CW" */
 import CoreWLAN
 
-let ChannelBandLabels: [CWChannelBand: String] = [
+public let ChannelBandLabels: [CWChannelBand: String] = [
     .bandUnknown: "Unknown", // 0
     .band2GHz:       "2GHz", // 1
     .band5GHz:       "5GHz", // 2
 ]
 
-let ChannelWidthLabels: [CWChannelWidth: String] = [
+public let ChannelWidthLabels: [CWChannelWidth: String] = [
     .widthUnknown: "Unknown", // 0
     .width20MHz:     "20MHz", // 1
     .width40MHz:     "40MHz", // 2
@@ -24,7 +24,7 @@ let ChannelWidthLabels: [CWChannelWidth: String] = [
 ]
 
 /** IEEE 802.11 physical layer mode */
-let PHYModeLabels: [CWPHYMode: String] = [
+public let PHYModeLabels: [CWPHYMode: String] = [
     .modeNone:         "", // 0
     .mode11a:   "802.11a", // 1
     .mode11b:   "802.11b", // 2
@@ -34,7 +34,7 @@ let PHYModeLabels: [CWPHYMode: String] = [
 ]
 
 /** Wi-Fi interface operating modes returned by CWInterface#interfaceMode() */
-let InterfaceModeLabels: [CWInterfaceMode: String] = [
+public let InterfaceModeLabels: [CWInterfaceMode: String] = [
   /** Not in any mode */
   .none:       "None", // 0
   /** Participating in an infrastructure network as a non-AP station */
@@ -46,7 +46,7 @@ let InterfaceModeLabels: [CWInterfaceMode: String] = [
 ]
 
 /** Labels describing the IEEE 802.11 physical layer mode */
-let SecurityLabels: [CWSecurity: String] = [
+public let SecurityLabels: [CWSecurity: String] = [
   /** No authentication required */
   .none:               "None",               // 0
   /** WEP security */
@@ -78,13 +78,14 @@ let SecurityLabels: [CWSecurity: String] = [
  - CWChannelWidth channelWidth
  - CWChannelBand channelBand
 */
-func channelDictionary(_ channel: CWChannel) -> [String: String] {
+public func channelDictionary(_ channel: CWChannel) -> [String: String] {
   return [
     "ChannelNumber": channel.channelNumber.description,
     "ChannelBand":   ChannelBandLabels[channel.channelBand]!,
     "ChannelWidth":  ChannelWidthLabels[channel.channelWidth]!]
 }
-func optionalChannelDictionary(_ channel: CWChannel?) -> [String: String]? {
+
+public func optionalChannelDictionary(_ channel: CWChannel?) -> [String: String]? {
   if let channelValue = channel {
     return channelDictionary(channelValue)
   } else {
@@ -106,7 +107,7 @@ func optionalChannelDictionary(_ channel: CWChannel?) -> [String: String]? {
  - NSInteger beaconInterval
  - BOOL ibss
  */
-func networkDictionary(_ network: CWNetwork) -> [String: String] {
+public func networkDictionary(_ network: CWNetwork) -> [String: String] {
   return [
     "SSID":               network.ssid ?? "N/A",
     "SSIDData":           String(data: network.ssidData ?? Data(), encoding: .ascii) ?? "N/A",
@@ -142,7 +143,7 @@ func networkDictionary(_ network: CWNetwork) -> [String: String] {
  - cachedScanResults()     -> NSSet<CWNetwork>?
  - configuration()         -> CWConfiguration?
 */
-func interfaceDictionary(_ interface: CWInterface) -> [String: String] {
+public func interfaceDictionary(_ interface: CWInterface) -> [String: String] {
   return [
     "PowerOn":            interface.powerOn().description,
     //"SupportedChannels":  interface.supportedWLANChannels()!.description,
