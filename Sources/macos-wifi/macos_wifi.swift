@@ -71,6 +71,12 @@ public let SecurityLabels: [CWSecurity: String] = [
   .unknown:            "Unknown",            // Int.max
 ]
 
+public func channelSecurity(_ channel: CWSecurity) -> [String: String] {
+    return [
+        "Security" : SecurityLabels[CWSecurity(rawValue: channel.rawValue)!]!
+    ]
+}
+
 /**
  CWChannel instances have these properties:
 
